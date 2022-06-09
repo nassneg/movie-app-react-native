@@ -22,8 +22,8 @@ const MovieCard = (props) => {
 
           <Box h="100">
             <Heading size="xs">Title{title}</Heading>
-            <Text>Popularity:{popularity}</Text>
-            <Text>Release Date:{date}</Text>
+            <Text>Popularity: {popularity}</Text>
+            <Text>Release Date: {date}</Text>
             <Button
               w="200"
               onPress={() =>
