@@ -1,20 +1,44 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import IndexScreen from "../screens/IndexScreen";
-import ShowScreen from "../screens/ShowScreen";
-import WebScreen from "../screens/WebScreen";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import IndexScreen from '../screens/IndexScreen'
+import ShowScreen from '../screens/ShowScreen'
+import WebScreen from '../screens/WebScreen'
 
-const Tab = createMaterialTopTabNavigator();
+const Stack = createNativeStackNavigator()
 
 const AppStack = () => (
   <NavigationContainer>
-    <Tab.Navigator>
-      <Tab.Screen name="Movies" component={IndexScreen} />
-      <Tab.Screen name="Search Results" component={ShowScreen} />
-      <Tab.Screen name="TV Shows" component={WebScreen} />
-    </Tab.Navigator>
+    <Stack.Navigator>
+      <Stack.Screen
+        name='Index'
+        component={IndexScreen}
+        options={{
+          title: 'Recipe App',
+          headerStyle: {
+            backgroundColor: '#2c3e50'
+          },
+          headerTitleStyle: {
+            color: '#fff'
+          }
+        }}
+      />
+      <Stack.Screen
+        name='Show'
+        component={ShowScreen}
+        options={({ route }) => ({
+          title: route.params.label
+        })}
+      />
+      <Stack.Screen
+        name='Web'
+        component={WebScreen}
+        options={({ route }) => ({
+          title: route.params.label,
+          headerBackTitle: 'Back to Show'
+        })}
+      />
+    </Stack.Navigator>
   </NavigationContainer>
-);
+)
 
-export default AppStack;
+export default AppStack
