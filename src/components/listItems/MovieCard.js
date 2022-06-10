@@ -10,10 +10,9 @@ import {
   Flex,
 } from "native-base";
 
-const MovieCard = (props) => {
-  const { image, title, navigation, date, url, popularity } = props;
+const MovieCard = ({ image, title, navigation, date, name, popularity }) => {
   return (
-    <Box borderWidth={1} borderRadius="md">
+    <Box borderBottomWidth={1}>
       <VStack space={1} divider={<Divider />}>
         <Flex direction="row" align="left" mb="2" mt="2">
           <Box w="100" h="100" mr="2" ml="3">
@@ -21,7 +20,10 @@ const MovieCard = (props) => {
           </Box>
 
           <Box h="100">
-            <Heading size="xs">Title{title}</Heading>
+            <Heading size="xs">
+              {title}
+              {name}
+            </Heading>
             <Text>Popularity: {popularity}</Text>
             <Text>Release Date: {date}</Text>
             <Button
@@ -29,7 +31,7 @@ const MovieCard = (props) => {
               onPress={() =>
                 navigation.navigate("Show", {
                   title,
-                  url,
+                  id,
                 })
               }
             >
