@@ -1,5 +1,7 @@
 import { Text, View } from "react-native";
 
-const ShowScreen = () => <Text>Show</Text>;
+const ShowScreen = ({ navigation, route }) => (
+  <RecipeWebView navigation={navigation} route={route} />
+);
 
 export default ShowScreen;
