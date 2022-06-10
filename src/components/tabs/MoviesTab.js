@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Select,
   Box,
@@ -8,10 +8,35 @@ import {
   NativeBaseProvider,
 } from "native-base";
 import MovieList from "../lists/MoviesList";
+import { getMovies } from "../../services/moviesAPI";
 
 const Movies = () => {
-  let [category, setCategory] = React.useState("");
-  console.log(category);
+  const [category, setCategory] = useState("popular");
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = () => {
+      getMovies("movie", category)
+        .then((res) => {
+          setMovies(res);
+        })
+        .catch((err) => console.log(err));
+    };
+
+    return unsubscribe;
+  }, [category]);
+
+  useEffect(() => {
+    const unsubscribe = () => {
+      getMovies("movie", category)
+        .then((res) => {
+          setMovies(res);
+        })
+        .catch((err) => console.log(err));
+    };
+    return unsubscribe;
+  }, []);
+
   return (
     <>
       <Center>
@@ -26,7 +51,9 @@ const Movies = () => {
               endIcon: <CheckIcon size="5" />,
             }}
             mt={1}
-            onValueChange={(itemValue) => setCategory(itemValue)}
+            onValueChange={(itemValue) => {
+              setCategory(itemValue);
+            }}
           >
             <Select.Item label="Now Playing" value="now_playing" />
             <Select.Item label="Popular" value="popular" />
@@ -35,7 +62,7 @@ const Movies = () => {
           </Select>
         </Box>
       </Center>
-      <MovieList />
+      <MovieList data={movies} />
     </>
   );
 };

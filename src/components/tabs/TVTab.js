@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Select,
   Box,
@@ -7,11 +7,36 @@ import {
   Center,
   NativeBaseProvider,
 } from "native-base";
+import { getMovies } from "../../services/moviesAPI";
 import MovieList from "../lists/MoviesList";
 
 const TV = () => {
-  let [category, setCategory] = React.useState("");
-  console.log(category);
+  const [category, setCategory] = React.useState("popular");
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = () => {
+      getMovies("tv", category)
+        .then((res) => {
+          setMovies(res);
+        })
+        .catch((err) => console.log(err));
+    };
+
+    return unsubscribe;
+  }, [category]);
+
+  useEffect(() => {
+    const unsubscribe = () => {
+      getMovies("tv", category)
+        .then((res) => {
+          setMovies(res);
+        })
+        .catch((err) => console.log(err));
+    };
+    return unsubscribe;
+  }, []);
+
   return (
     <>
       <Center>
@@ -35,7 +60,7 @@ const TV = () => {
           </Select>
         </Box>
       </Center>
-      <MovieList />
+      <MovieList data={movies} />
     </>
   );
 };
