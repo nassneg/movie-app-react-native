@@ -15,7 +15,7 @@ const MoviesList = ({ data, navigation, type }) => {
           date={item.release_date}
           popularity={item.popularity}
           id={item.id}
-          type={type}
+          type={type ? type : item.media_type}
         />
       )}
       keyExtractor={(item) => item.id}
