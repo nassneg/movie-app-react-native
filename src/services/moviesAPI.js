@@ -22,3 +22,14 @@ export const getMovie = async (type, movieId) => {
 
   return movie;
 };
+
+export const movieSearch = async (type, query) => {
+  const movie = axios
+    .get(`${BASE_URL}search/${type}?api_key=${APP_KEY}&query=${query}`)
+    .then((response) => response.data.results)
+    .catch((error) => {
+      throw error;
+    });
+
+  return movie;
+};
