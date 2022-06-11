@@ -26,10 +26,7 @@ const MovieCard = ({ image, title, date, name, popularity, id, type }) => {
           </Box>
 
           <Box h="100">
-            <Heading size="xs">
-              {title}
-              {name}
-            </Heading>
+            <Heading size="xs">{title ? title : name}</Heading>
             <Text>Popularity: {popularity}</Text>
             <Text>Release Date: {date}</Text>
             <Button
