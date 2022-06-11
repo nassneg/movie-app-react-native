@@ -1,44 +1,36 @@
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import IndexScreen from '../screens/IndexScreen'
-import ShowScreen from '../screens/ShowScreen'
-import WebScreen from '../screens/WebScreen'
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ShowScreen from "../screens/ShowScreen";
+import AppTab from "../tabs/AppTab";
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 const AppStack = () => (
   <NavigationContainer>
     <Stack.Navigator>
       <Stack.Screen
-        name='Index'
-        component={IndexScreen}
+        name="Home"
+        component={AppTab}
         options={{
-          title: 'Recipe App',
+          title: "Movies App",
           headerStyle: {
-            backgroundColor: '#2c3e50'
+            backgroundColor: "#2c3e50",
           },
           headerTitleStyle: {
-            color: '#fff'
-          }
+            color: "#fff",
+          },
         }}
       />
       <Stack.Screen
-        name='Show'
+        name="Show"
         component={ShowScreen}
         options={({ route }) => ({
-          title: route.params.label
-        })}
-      />
-      <Stack.Screen
-        name='Web'
-        component={WebScreen}
-        options={({ route }) => ({
-          title: route.params.label,
-          headerBackTitle: 'Back to Show'
+          title: route.params.title ? route.params.title : route.params.name,
+          headerBackTitle: "Back to List",
         })}
       />
     </Stack.Navigator>
   </NavigationContainer>
-)
+);
 
-export default AppStack
+export default AppStack;
