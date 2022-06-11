@@ -1,12 +1,5 @@
-import { Text, View } from "react-native";
 import React, { useState, useEffect } from "react";
-import {
-  Select,
-  Box,
-  CheckIcon,
-  Center,
-  NativeBaseProvider,
-} from "native-base";
+import { Select, Box, CheckIcon, Center } from "native-base";
 import { getMovies } from "../../services/moviesAPI";
 import MovieList from "../lists/MoviesList";
 import Loading from "../layout/Loading";
@@ -17,14 +10,14 @@ const TV = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    unsubscribe();
+    fetchMovies();
   }, [category]);
 
   useEffect(() => {
-    unsubscribe();
+    fetchMovies();
   }, []);
 
-  const unsubscribe = () => {
+  const fetchMovies = () => {
     setIsLoading(true);
     getMovies("tv", category)
       .then((res) => {

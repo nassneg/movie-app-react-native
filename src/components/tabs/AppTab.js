@@ -1,4 +1,3 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Movies from "./MoviesTab";
 import Search from "./SearchTab";
