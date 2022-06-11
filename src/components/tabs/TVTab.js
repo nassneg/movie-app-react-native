@@ -9,33 +9,30 @@ import {
 } from "native-base";
 import { getMovies } from "../../services/moviesAPI";
 import MovieList from "../lists/MoviesList";
+import Loading from "../layout/Loading";
 
 const TV = () => {
   const [category, setCategory] = React.useState("popular");
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = () => {
-      getMovies("tv", category)
-        .then((res) => {
-          setMovies(res);
-        })
-        .catch((err) => console.log(err));
-    };
-
-    return unsubscribe;
+    unsubscribe();
   }, [category]);
 
   useEffect(() => {
-    const unsubscribe = () => {
-      getMovies("tv", category)
-        .then((res) => {
-          setMovies(res);
-        })
-        .catch((err) => console.log(err));
-    };
-    return unsubscribe;
+    unsubscribe();
   }, []);
+
+  const unsubscribe = () => {
+    setIsLoading(true);
+    getMovies("tv", category)
+      .then((res) => {
+        setMovies(res);
+        setIsLoading(false);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -60,7 +57,7 @@ const TV = () => {
           </Select>
         </Box>
       </Center>
-      <MovieList data={movies} />
+      {isLoading ? <Loading /> : <MovieList data={movies} type="tv" />}
     </>
   );
 };
